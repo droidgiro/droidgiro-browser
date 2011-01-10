@@ -1,0 +1,40 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Reference</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            {% for ocr in ocr_list %}
+            <tr>
+                <td>{{ocr.reference}}</td>
+                <td>{{ocr.date}}</td>
+                <td class="copy-action" style="cursor:pointer">Copy</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>    
+    <script>
+    $(document).ready(function() {
+        clip = new ZeroClipboard.Client();
+        //clip.setHandCursor(true);
+
+        $('.copy-action').mouseover( function() {
+            clip.setText($(this).prev().prev().text());
+
+            if (clip.div) {
+                clip.receiveEvent('mouseout', null);
+                clip.reposition(this);
+            }
+            else clip.glue(this);
+
+            clip.receiveEvent('mouseover', null);
+        });
+    });
+    </script>
+</html>
