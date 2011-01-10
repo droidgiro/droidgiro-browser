@@ -1,4 +1,7 @@
 <html>
+    <head>
+        <script src='/_ah/channel/jsapi'></script>
+    </head>
     <body>
         <table>
             <tr>
@@ -18,7 +21,21 @@
     </body>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-    <script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>    
+    <script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>
+    
+  <script>
+    onMessage = function(m) {
+        console.log("### " + m.data);
+    }
+
+    channel = new goog.appengine.Channel('{{ token }}');
+    socket = channel.open();
+    //socket.onopen = onOpened;
+    socket.onmessage = onMessage;
+    //socket.onerror = onError;
+    //socket.onclose = onClose;
+  </script>
+
     <script>
     $(document).ready(function() {
         clip = new ZeroClipboard.Client();
