@@ -9,10 +9,10 @@
                 <th>Date</th>
                 <th>Action</th>
             </tr>
-            {% for ocr in ocr_list %}
+            {% for invoice in invoice_list %}
             <tr>
-                <td>{{ocr.reference}}</td>
-                <td>{{ocr.date}}</td>
+                <td>{{invoice.reference}}</td>
+                <td>{{invoice.date}}</td>
                 <td class="copy-action" style="cursor:pointer">Copy</td>
             </tr>
             {% endfor %}

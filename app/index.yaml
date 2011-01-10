@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Invoice
+  properties:
+  - name: user
+  - name: date
+    direction: desc
+
 - kind: Ocr
   properties:
   - name: user
