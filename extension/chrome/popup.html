@@ -1,0 +1,46 @@
+<style>
+body {
+  min-width:357px;
+  overflow-x:hidden;
+}
+
+img {
+  margin:5px;
+  border:2px solid black;
+  vertical-align:middle;
+  width:75px;
+  height:75px;
+}
+</style>
+
+<script>
+
+var req = new XMLHttpRequest();
+req.open(
+    "GET",
+    "http://agiroapp.appspot.com/invoices",
+    true);
+//req.setRequestHeader('X-Same-Domain', 'true');
+req.onload = showInvoices;
+req.send(null);
+
+function showInvoices() {
+    if (req.status == 200) {
+        jsonInvoices = "invoices = " + req.responseText;
+        eval(jsonInvoices);
+        
+        var ul = document.createElement("ul")
+        for (var i = 0, invoice; invoice = invoices[i]; i++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(invoice.reference));
+            ul.appendChild(li);
+        }
+        document.body.appendChild(ul);
+    } else if (req.status == 401) {
+        var p = document.createElement("p");        
+        p.appendChild(document.createTextNode("Login required."));
+        document.body.appendChild(p);
+    }
+}
+
+</script>
