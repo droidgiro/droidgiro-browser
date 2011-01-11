@@ -15,9 +15,3 @@ indexes:
   - name: user
   - name: date
     direction: desc
-
-- kind: Ocr
-  properties:
-  - name: user
-  - name: date
-    direction: desc
