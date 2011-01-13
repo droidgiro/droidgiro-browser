@@ -19,6 +19,10 @@ class Invoice(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
 
     def to_dict(self):
+        # to_dict taken from posten-mock[1] by Johan Mjönes and the stack
+        # overflow[2] answer by David Wilson. Thanks to both of you.
+        # [1] https://github.com/nollbit/posten-mock
+        # [2] http://stackoverflow.com/questions/1531501/json-serialization-of-google-app-engine-models
         model = self
         output = {}
         for key, prop in model.properties().iteritems():
