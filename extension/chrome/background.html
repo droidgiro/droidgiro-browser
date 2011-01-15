@@ -57,15 +57,38 @@ function initializeBrowserChannel() {
                 }
                 socket.onmessage = function(evt) {
                     var o = JSON.parse(evt.data);
-                    var notification = new Object();
-                    notification.title = "OCR"
-                    notification.body = o.reference
-                    notify(notification);
+
+                    chrome.tabs.getAllInWindow(null, function(tabs) {
+                        var found = 0;
+
+                        for (var i = 0; i < tabs.length; i++) {
+                            console.log()
+                            if (tabs[i].url.indexOf("swedbank") != -1) {
+                                found++;
+                                handleSwedbank(o, tabs[i]);
+                            }
+                        }
+
+                        if (found == 0) {
+                             var notification = new Object();
+                             notification.title = "OCR"
+                             notification.body = o.reference
+                             notify(notification);
+                         }
+                    });
+
+ 
                 }
             }
         }
     }
     req.send(null);
+}
+
+function handleSwedbank(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+        code: "document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"'"
+    })
 }
 </script>
 
