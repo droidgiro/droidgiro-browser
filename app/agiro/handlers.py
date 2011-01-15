@@ -130,7 +130,7 @@ class InvoiceV2Handler(webapp.RequestHandler):
 class RegisterHandler(webapp.RequestHandler):
     def get(self):
         #identifier = 1000 #random.randint(1000, 9999)
-        identifier = random.randint(10000, 99999)
+        identifier = random.randint(1000, 9999)
         token = channel.create_channel(str(identifier))
 
         self.response.headers.add_header("Content-Type", 'application/json; charset=utf-8')
