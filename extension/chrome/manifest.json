@@ -2,9 +2,14 @@
   "name": "Agiro",
   "version": "1.0",
   "description": "agiro.",
+  "background_page": "background.html",
   "browser_action": {
     "default_icon": "icon.png",
     "popup": "popup.html"
   },
-  "permissions": [ "tabs", "http://*/" ]
+  "permissions": [
+        "tabs",
+        "notifications",
+    "http://*/"
+  ]
 }
