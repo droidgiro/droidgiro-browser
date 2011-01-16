@@ -1,57 +1,26 @@
-<html>
-    <head>
-        <script src='/_ah/channel/jsapi'></script>
-    </head>
-    <body>
-        <table>
-            <tr>
-                <th>Reference</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-            {% for invoice in invoice_list %}
-            <tr>
-                <td>{{invoice.reference}}</td>
-                <td>{{invoice.date}}</td>
-                <td class="copy-action" style="cursor:pointer">Copy</td>
-            </tr>
-            {% endfor %}
-        </table>
+<!doctype html>  
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Droidgiro</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
 
-    </body>
+<body>
+    <div id="container">
+        <header>
+            <h1>droidgiro</h1>
+        </header>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
-    <script type="text/javascript" src="/static/javascripts/ZeroClipboard.js"></script>
-    
-  <script>
-    onMessage = function(m) {
-        console.log("### " + m.data);
-    }
+        <div id="main">
+        </div>
 
-    channel = new goog.appengine.Channel('{{ token }}');
-    socket = channel.open();
-    //socket.onopen = onOpened;
-    socket.onmessage = onMessage;
-    //socket.onerror = onError;
-    //socket.onclose = onClose;
-  </script>
+        <footer>
 
-    <script>
-    $(document).ready(function() {
-        clip = new ZeroClipboard.Client();
-        //clip.setHandCursor(true);
-
-        $('.copy-action').mouseover( function() {
-            clip.setText($(this).prev().prev().text());
-
-            if (clip.div) {
-                clip.receiveEvent('mouseout', null);
-                clip.reposition(this);
-            }
-            else clip.glue(this);
-
-            clip.receiveEvent('mouseover', null);
-        });
-    });
-    </script>
+        </footer>
+    </div> <!-- end of #container -->
+</body>
 </html>
