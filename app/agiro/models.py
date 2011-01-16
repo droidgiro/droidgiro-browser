@@ -6,6 +6,11 @@ import time
 
 SIMPLE_TYPES = (int, long, float, bool, dict, basestring, list)
 
+class Pin(db.Model):
+    code = db.IntegerProperty()
+    channel = db.StringProperty()
+    date = db.DateTimeProperty(auto_now_add=True)
+
 class Invoice(db.Model):
     user = db.UserProperty()
     reference = db.StringProperty()
