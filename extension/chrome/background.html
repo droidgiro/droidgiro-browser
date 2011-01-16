@@ -68,6 +68,9 @@ function initializeBrowserChannel() {
                             } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
                                 found++;
                                 handleSkandiabanken(o, tabs[i]);
+                            } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
+                                found++;
+                                handleLansforsakringar(o, tabs[i]);
                             }
                         }
 
@@ -98,6 +101,13 @@ function handleSwedbank(invoice, tab) {
         code: "document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"'"
     });
 }
+
+function handleLansforsakringar(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+        code: "document.getElementById('paymentId').value= '"+ invoice.reference +"'"
+    });
+}
+
 </script>
 
 </html>
