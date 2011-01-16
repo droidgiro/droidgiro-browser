@@ -62,10 +62,12 @@ function initializeBrowserChannel() {
                         var found = 0;
 
                         for (var i = 0; i < tabs.length; i++) {
-                            console.log()
                             if (tabs[i].url.indexOf("swedbank") != -1) {
                                 found++;
                                 handleSwedbank(o, tabs[i]);
+                            } else if (tabs[i].url.indexOf("skandiabanken") != -1) {
+                                found++;
+                                handleSkandiabanken(o, tabs[i]);
                             }
                         }
 
@@ -85,10 +87,16 @@ function initializeBrowserChannel() {
     req.send(null);
 }
 
+function handleSkandiabanken(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+        code: "var inputs = document.getElementsByTagName('input'); for (i = 0; i <= inputs.length; i++) { if (inputs[i] != null && inputs[i].type == 'text' && inputs[i].name.indexOf('inputs')) { inputs[i].value='"+ invoice.reference +"'; } }"
+    });
+}
+
 function handleSwedbank(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
         code: "document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"'"
-    })
+    });
 }
 </script>
 
