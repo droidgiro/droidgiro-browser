@@ -2,13 +2,13 @@
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
-from agiro.handlers import MainPage, InvoiceHandler, RegisterHandler, InvoiceV2Handler
+from agiro.handlers import MainPage, InvoiceHandler, RegisterHandler
 
 def main():
     application = webapp.WSGIApplication([
             ('/', MainPage),
             ('/invoices(?:/(\d+))?', InvoiceHandler),
-            ('/v2/invoices(?:/(\d+))?', InvoiceV2Handler),
+            ('/v2/invoices(?:/(\d+))?', InvoiceHandler),
             ('/register', RegisterHandler)
         ],
         debug=True)
