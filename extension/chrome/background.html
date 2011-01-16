@@ -62,10 +62,10 @@ function initializeBrowserChannel() {
                         var found = 0;
 
                         for (var i = 0; i < tabs.length; i++) {
-                            if (tabs[i].url.indexOf("swedbank") != -1) {
+                            if (tabs[i].url.indexOf("swedbank.se") != -1) {
                                 found++;
                                 handleSwedbank(o, tabs[i]);
-                            } else if (tabs[i].url.indexOf("skandiabanken") != -1) {
+                            } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
                                 found++;
                                 handleSkandiabanken(o, tabs[i]);
                             }
@@ -89,7 +89,7 @@ function initializeBrowserChannel() {
 
 function handleSkandiabanken(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "var inputs = document.getElementsByTagName('input'); for (i = 0; i <= inputs.length; i++) { if (inputs[i] != null && inputs[i].type == 'text' && inputs[i].name.indexOf('inputs')) { inputs[i].value='"+ invoice.reference +"'; } }"
+        code: "document.getElementById('ctl00_ctl00_ctl00_cphContentWide_cphContentWide_cphMainContent_tbReferenceNumber').value='" + invoice.reference +  "'"
     });
 }
 
