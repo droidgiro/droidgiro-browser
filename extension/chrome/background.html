@@ -71,6 +71,9 @@ function initializeBrowserChannel() {
                             } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
                                 found++;
                                 handleLansforsakringar(o, tabs[i]);
+                            } else if (tabs[i].url.indexOf("nordea.se") != -1) {
+                                found++;
+                                handleNordea(o, tabs[i]);
                             }
                         }
 
@@ -105,6 +108,13 @@ function handleSwedbank(invoice, tab) {
 function handleLansforsakringar(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
         code: "document.getElementById('paymentId').value= '"+ invoice.reference +"'"
+    });
+}
+
+function handleNordea(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+        code: "document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
+              "document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
     });
 }
 
