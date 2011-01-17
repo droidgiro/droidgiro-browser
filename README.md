@@ -8,7 +8,4 @@ The following browsers are currently supported:
 
 ### Chrome
 This extension supports:
- * Swedbank (reference)
- * Skandiabanken (reference)
- * Länsförsäkringar (reference)
- * Nordea (reference, amount)
+Swedbank (reference), Skandiabanken (reference), Lansforsakringar (reference), Nordea (reference, amount)
