@@ -74,6 +74,9 @@ function initializeBrowserChannel() {
                             } else if (tabs[i].url.indexOf("nordea.se") != -1) {
                                 found++;
                                 handleNordea(o, tabs[i]);
+                            } else if (tabs[i].url.indexOf("handelsbanken.se") != -1) {
+                                found++;
+                                handleHandelsbanken(o, tabs[i]);
                             }
                         }
 
@@ -117,6 +120,14 @@ function handleNordea(invoice, tab) {
               "document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
     });
 }
+
+function handleHandelsbanken(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+        code: "document.getElementById('FRI_TEXT0').value= '"+ invoice.reference +"'"
+    });
+}
+
+FRI_TEXT0
 
 </script>
 
