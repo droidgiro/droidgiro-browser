@@ -6,12 +6,19 @@ body {
 
 </style>
 
-<body onLoad="init();">
+<body>
   
 </body>
 
 <script>
 
+window.onload = function() {
+    console.log('hey');
+    var bg = chrome.extension.getBackgroundPage();
+    bg.initializeBrowserChannel();
+}
+
+/*
 function init() {
     var img = document.createElement("image")
     img.src = "http://chart.apis.google.com/chart?cht=qr&chs=230x230&chl=" + localStorage['identifier']
@@ -20,5 +27,6 @@ function init() {
     p.appendChild(document.createTextNode(localStorage['identifier']));
     document.body.appendChild(p);
 }
+*/
 
 </script>
