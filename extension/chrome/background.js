@@ -75,7 +75,7 @@ function onMessage(evt) {
     var o = JSON.parse(evt.data);
     console.log(o);
     if (o.type == 'invoice') {
-        onInvoiceMessage(o);
+        onInvoiceMessage(o.payload);
     } else if (o.type == 'register') {
         onRegisterMessage(o);
     }
