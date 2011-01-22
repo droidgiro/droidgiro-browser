@@ -1,7 +1,7 @@
 <style>
 body {
-  min-width:230px;
-  overflow-x:hidden;
+    min-width:230px;
+    overflow-x:hidden;
 }
 
 </style>
@@ -13,20 +13,37 @@ body {
 <script>
 
 window.onload = function() {
-    console.log('hey');
     var bg = chrome.extension.getBackgroundPage();
     bg.initializeBrowserChannel();
 }
 
-/*
-function init() {
-    var img = document.createElement("image")
-    img.src = "http://chart.apis.google.com/chart?cht=qr&chs=230x230&chl=" + localStorage['identifier']
-    document.body.appendChild(img);
-    var p = document.createElement("p");        
-    p.appendChild(document.createTextNode(localStorage['identifier']));
+// Perform the callback when a request is received from the content script
+chrome.extension.onRequest.addListener(function(request) {
+    console.log('onRequest...');
+    console.log(request);
+
+    if (request.type == 'pin') {
+        showPin(request.payload);
+    } else if (request.type == 'registered') {
+        showMessage('Ready to recieve invoices.');
+    } else if (request.type == 'reload') {
+        // TODO: Might need a timeout here...
+        console.log('about to reload...');
+        var bg = chrome.extension.getBackgroundPage();
+        bg.initializeBrowserChannel();
+    }
+}); 
+
+function showMessage(message) {
+    var p = document.createElement("p");
+    p.appendChild(document.createTextNode(message));
     document.body.appendChild(p);
 }
-*/
+
+function showPin(pin) {
+    var p = document.createElement("p");
+    p.appendChild(document.createTextNode(pin));
+    document.body.appendChild(p);
+}
 
 </script>

@@ -3,26 +3,46 @@ var registerUrl = baseUrl + '/register';
 
 function notify(message) {
     if (window.webkitNotifications.checkPermission() == 0) {
-        window.webkitNotifications.createNotification("https://github.com/wulax/aGiro/raw/master/res/drawable-mdpi/icon.png", message.title, message.body).show();
+        window.webkitNotifications.createNotification("/icon.png", message.title, message.body).show();
     } else {
         alert(message);
     }
 }
 
+function sendRequest(type, payload) {
+    chrome.extension.sendRequest({
+        'type': type,
+        'payload': payload,
+    });
+}
+
+var socket = null;
+
 function initializeBrowserChannel() {
+    console.log('initializeBrowserChannel');
+
+    if (socket != null) {
+        console.log('Closing socket.');
+        //socket.close();
+        // This is a workaround since socket.close() does not work from a extension.
+        sendRequest('reload', 'Reloading...');
+        location.reload(true)
+
+        return;
+    }
+
     var req = new XMLHttpRequest();
     req.open("GET", registerUrl, true);
     req.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (req.status == 200) {
-                channel = JSON.parse(req.responseText);
-                console.log("token: " + channel.token);
-                console.log("pin: " + channel.pin);
+                channelData = JSON.parse(req.responseText);
+                console.log("token: " + channelData.token);
+                console.log("pin: " + channelData.pin);
 
-                // TODO: Send event to popup...
-                localStorage['pin'] = channel.pin
+                sendRequest('pin', channelData.pin);
 
-                var channelId = channel.token;
+                var channelId = channelData.token;
                 channel = new goog.appengine.Channel(channelId);
                 socket = channel.open();
                 socket.onopen = function() {
@@ -41,7 +61,11 @@ function initializeBrowserChannel() {
                     }
                 }
                 socket.onmessage = onMessage
+            } else {
+                console.log('registered returned: ' + req.status);
             }
+        } else {
+            console.log('this.readyState = ' + this.readyState);
         }
     }
     req.send(null);
@@ -58,8 +82,11 @@ function onMessage(evt) {
 }
 
 function onRegisterMessage(message) {
-    // TODO: Send event to popup...
-    console.log(message);
+    sendRequest('registered', message.payload);
+    var notification = new Object();
+    notification.title = 'Connected'
+    notification.body = 'Ready to recieve invoices.'
+    notify(notification);
 }
 
 function onInvoiceMessage(message) {
@@ -95,6 +122,8 @@ function onInvoiceMessage(message) {
 
 }
 
+// TODO: Maybe we should move bank scripts to separate js files and inject them
+// using; chrome.tabs.executeScript(null, {file: "swedbank_script.js"});
 function handleSkandiabanken(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
         code: "document.getElementById('ctl00_ctl00_ctl00_cphContentWide_cphContentWide_cphMainContent_tbReferenceNumber').value='" + invoice.reference +  "'"
