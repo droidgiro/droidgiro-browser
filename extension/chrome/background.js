@@ -82,6 +82,7 @@ function onMessage(evt) {
 }
 
 function onRegisterMessage(message) {
+    // TODO: Check if popup is still open, oterwise show a notification.
     sendRequest('registered', message.payload);
     var notification = new Object();
     notification.title = 'Connected'
@@ -94,7 +95,7 @@ function onInvoiceMessage(message) {
         var found = 0;
 
         for (var i = 0; i < tabs.length; i++) {
-            if (tabs[i].url.indexOf("swedbank.se") != -1) {
+            if (tabs[i].url.indexOf("internetbank.swedbank.se") != -1) {
                 found++;
                 handleSwedbank(message, tabs[i]);
             } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
@@ -106,7 +107,7 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("nordea.se") != -1) {
                 found++;
                 handleNordea(o, tabs[i]);
-            } else if (tabs[i].url.indexOf("handelsbanken.se") != -1) {
+            } else if (tabs[i].url.indexOf("secure.handelsbanken.se") != -1) {
                 found++;
                 handleHandelsbanken(message, tabs[i]);
             }
@@ -131,8 +132,10 @@ function handleSkandiabanken(invoice, tab) {
 }
 
 function handleSwedbank(invoice, tab) {
+    console.log('handle swedbank...');
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"'"
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"';" +
+              "if ('"+ invoice.amount +"' != '') document.getElementById('beloppProcent').value= '"+ invoice.amount +"'"
     });
 }
 
@@ -144,13 +147,17 @@ function handleLansforsakringar(invoice, tab) {
 
 function handleNordea(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
-              "document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
+              "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
     });
 }
 
 function handleHandelsbanken(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('FRI_TEXT0').value= '"+ invoice.reference +"'"
+        allFrames: true,
+        code: "if ('"+ invoice.amount +"' != '') document.getElementById('TRANSAKTIONSBELOPP').value= '"+ invoice.amount +"';" +
+              "if ('"+ invoice.account +"' != '') document.getElementById('KTONR_BETMOTT').value= '"+ invoice.account +"';" +
+              "if ('"+ invoice.reference +"' != '') document.getElementsByName('FRI_TEXT0')[0].value = '"+ invoice.reference +"';" +
     });
 }
+
