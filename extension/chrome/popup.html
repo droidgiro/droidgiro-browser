@@ -18,9 +18,7 @@
         </script>
 
         <script type="text/javascript">
-            // when the dom's ready
             $(document).ready(function () {
-                // add a simple click handler for the "add user" button.
                 $('#generate_pin').click(function () {
                     var bg = chrome.extension.getBackgroundPage();
                     bg.initializeBrowserChannel();
