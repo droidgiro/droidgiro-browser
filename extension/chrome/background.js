@@ -107,7 +107,7 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("nordea.se") != -1) {
                 found++;
                 handleNordea(o, tabs[i]);
-            } else if (tabs[i].url.indexOf("handelsbanken.se") != -1) {
+            } else if (tabs[i].url.indexOf("secure.handelsbanken.se") != -1) {
                 found++;
                 handleHandelsbanken(message, tabs[i]);
             }
@@ -154,6 +154,10 @@ function handleNordea(invoice, tab) {
 
 function handleHandelsbanken(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('FRI_TEXT0').value= '"+ invoice.reference +"'"
+        allFrames: true,
+        code: "if ('"+ invoice.amount +"' != '') document.getElementById('TRANSAKTIONSBELOPP').value= '"+ invoice.amount +"';" +
+              "if ('"+ invoice.account +"' != '') document.getElementById('KTONR_BETMOTT').value= '"+ invoice.account +"';" +
+              "if ('"+ invoice.reference +"' != '') document.getElementsByName('FRI_TEXT0')[0].value = '"+ invoice.reference +"';" +
     });
 }
+
