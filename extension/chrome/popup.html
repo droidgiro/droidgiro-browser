@@ -29,9 +29,6 @@
             });
 
             chrome.extension.onRequest.addListener(function(request) {
-                console.log('onRequest...');
-                console.log(request);
-
                 if (request.type == 'pin') {
                     pin = ich.pin({
                         'pin_code': request.payload
