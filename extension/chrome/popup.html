@@ -43,10 +43,10 @@
                     connected = ich.connected({});
                     $('#main').html(connected);
                 } else if (request.type == 'reload') {
-                    // TODO: Might need a timeout here...
-                    console.log('about to reload...');
-                    var bg = chrome.extension.getBackgroundPage();
-                    bg.initializeBrowserChannel();
+                    setTimeout(function() {
+                        var bg = chrome.extension.getBackgroundPage();
+                        bg.initializeBrowserChannel();
+                    }, 100);
                 }
             });
         </script>
