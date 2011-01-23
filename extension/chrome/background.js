@@ -147,8 +147,8 @@ function handleLansforsakringar(invoice, tab) {
 
 function handleNordea(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
-              "document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
+              "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
     });
 }
 
