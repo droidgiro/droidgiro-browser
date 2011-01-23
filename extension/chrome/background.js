@@ -82,6 +82,7 @@ function onMessage(evt) {
 }
 
 function onRegisterMessage(message) {
+    // TODO: Check if popup is still open, oterwise show a notification.
     sendRequest('registered', message.payload);
     var notification = new Object();
     notification.title = 'Connected'
@@ -94,7 +95,7 @@ function onInvoiceMessage(message) {
         var found = 0;
 
         for (var i = 0; i < tabs.length; i++) {
-            if (tabs[i].url.indexOf("swedbank.se") != -1) {
+            if (tabs[i].url.indexOf("internetbank.swedbank.se") != -1) {
                 found++;
                 handleSwedbank(message, tabs[i]);
             } else if (tabs[i].url.indexOf("skandiabanken.se") != -1) {
@@ -131,8 +132,10 @@ function handleSkandiabanken(invoice, tab) {
 }
 
 function handleSwedbank(invoice, tab) {
+    console.log('handle swedbank...');
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"'"
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"';" +
+              "if ('"+ invoice.amount +"' != '') document.getElementById('beloppProcent').value= '"+ invoice.amount +"'"
     });
 }
 
