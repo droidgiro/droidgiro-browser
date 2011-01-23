@@ -1,49 +1,61 @@
-<style>
-body {
-    min-width:230px;
-    overflow-x:hidden;
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="jquery-1.4.4.min.js" type="text/javascript"></script>
+        <script src="ICanHaz.min.js" type="text/javascript"></script>
 
-</style>
+        <script id="generate_pin" type="text/html">
+            <p>Genererar PIN...</p>
+        </script>
 
-<body>
-  
-</body>
+        <script id="pin" type="text/html">
+            <h3>{{ pin_code }}</h3>
+            <p>Mata in pinkoden i Droidgiro appen. Pinkoden är giltig i fem minuter.</p>
+        </script>
 
-<script>
+        <script id="connected" type="text/html">
+            <p>Redo att skanna.</p>
+        </script>
 
-window.onload = function() {
-    var bg = chrome.extension.getBackgroundPage();
-    bg.initializeBrowserChannel();
-}
+        <script type="text/javascript">
+            // when the dom's ready
+            $(document).ready(function () {
+                // add a simple click handler for the "add user" button.
+                $('#generate_pin').click(function () {
+                    var bg = chrome.extension.getBackgroundPage();
+                    bg.initializeBrowserChannel();
 
-// Perform the callback when a request is received from the content script
-chrome.extension.onRequest.addListener(function(request) {
-    console.log('onRequest...');
-    console.log(request);
+                    generate_pin = ich.generate_pin({});
+                    $('#main').html(generate_pin);
+                });
+            });
 
-    if (request.type == 'pin') {
-        showPin(request.payload);
-    } else if (request.type == 'registered') {
-        showMessage('Ready to recieve invoices.');
-    } else if (request.type == 'reload') {
-        // TODO: Might need a timeout here...
-        console.log('about to reload...');
-        var bg = chrome.extension.getBackgroundPage();
-        bg.initializeBrowserChannel();
-    }
-}); 
+            chrome.extension.onRequest.addListener(function(request) {
+                console.log('onRequest...');
+                console.log(request);
 
-function showMessage(message) {
-    var p = document.createElement("p");
-    p.appendChild(document.createTextNode(message));
-    document.body.appendChild(p);
-}
+                if (request.type == 'pin') {
+                    pin = ich.pin({
+                        'pin_code': request.payload
+                    });
+                    $('#main').html(pin);
+                } else if (request.type == 'registered') {
+                    connected = ich.connected({});
+                    $('#main').html(connected);
+                } else if (request.type == 'reload') {
+                    // TODO: Might need a timeout here...
+                    console.log('about to reload...');
+                    var bg = chrome.extension.getBackgroundPage();
+                    bg.initializeBrowserChannel();
+                }
+            });
+        </script>
 
-function showPin(pin) {
-    var p = document.createElement("p");
-    p.appendChild(document.createTextNode(pin));
-    document.body.appendChild(p);
-}
+    </head>
 
-</script>
+    <body>
+        <h1>Droidgiro</h1>
+        <button id="generate_pin">Generera PIN</button>
+        <div id="main"></div>
+    </body>
+</html>
