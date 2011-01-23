@@ -158,7 +158,7 @@ function handleHandelsbanken(invoice, tab) {
         allFrames: true,
         code: "if ('"+ invoice.amount +"' != '') document.getElementById('TRANSAKTIONSBELOPP').value= '"+ invoice.amount +"';" +
               "if ('"+ invoice.account +"' != '') document.getElementById('KTONR_BETMOTT').value= '"+ invoice.account +"';" +
-              "if ('"+ invoice.reference +"' != '') document.getElementsByName('FRI_TEXT0')[0].value = '"+ invoice.reference +"';" +
+              "if ('"+ invoice.reference +"' != '') document.getElementsByName('FRI_TEXT0')[0].value = '"+ invoice.reference +"';"
     });
 }
 
