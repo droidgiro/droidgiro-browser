@@ -149,7 +149,7 @@ function handleLansforsakringar(invoice, tab) {
 
 function handleNordea(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "console.log('" + invoice + "'); if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
               "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"';" +
               "if ('"+ invoice.account +"' != '') document.getElementById('paymenttoaccount').value= '"+ invoice.account +"';" +
 			  "var radioValue = '0'; if ('" + invoice.type + "' == 'BG') { radioValue = '1'; }; var radios = document.getElementsByTagName('input'); for (var i=0; i<radios.length; i++) { var input = radios[i]; if (input.type == 'radio' && input.name == 'subtype_radio') { if (input.value == radioValue) { input.checked = true; } else { input.checked = false; }}};"
