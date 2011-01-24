@@ -150,7 +150,8 @@ function handleLansforsakringar(invoice, tab) {
 function handleNordea(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
         code: "if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
-              "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"'"
+              "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"';" +
+              "if ('"+ invoice.account +"' != '') document.getElementById('paymenttoaccount').value= '"+ invoice.account +"'"
     });
 }
 
