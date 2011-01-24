@@ -152,7 +152,7 @@ function handleNordea(invoice, tab) {
         code: "console.log('" + invoice + "'); if ('"+ invoice.reference +"' != '') document.getElementById('paymentmessage').value= '"+ invoice.reference +"';" +
               "if ('"+ invoice.amount +"' != '') document.getElementById('paymentamount').value= '"+ invoice.amount +"';" +
               "if ('"+ invoice.account +"' != '') document.getElementById('paymenttoaccount').value= '"+ invoice.account +"';" +
-			  "var radioValue = '0'; if (('" + invoice.type + "' == '41') || ('" + invoice.type + "' == '42')) { radioValue = '1'; }; var radios = document.getElementsByTagName('input'); for (var i=0; i<radios.length; i++) { var input = radios[i]; if (input.type == 'radio' && input.name == 'subtype_radio') { if (input.value == radioValue) { input.checked = true; } else { input.checked = false; }}};"
+			  "var radioValue = '0'; if ('" + invoice.type + "' == 'BG') { radioValue = '1'; }; var radios = document.getElementsByTagName('input'); for (var i=0; i<radios.length; i++) { var input = radios[i]; if (input.type == 'radio' && input.name == 'subtype_radio') { if (input.value == radioValue) { input.checked = true; } else { input.checked = false; }}};"
     });
 }
 
