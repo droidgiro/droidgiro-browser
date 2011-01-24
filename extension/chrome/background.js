@@ -106,7 +106,7 @@ function onInvoiceMessage(message) {
                 handleLansforsakringar(message, tabs[i]);
             } else if (tabs[i].url.indexOf("nordea.se") != -1) {
                 found++;
-                handleNordea(o, tabs[i]);
+                handleNordea(message, tabs[i]);
             } else if (tabs[i].url.indexOf("secure.handelsbanken.se") != -1) {
                 found++;
                 handleHandelsbanken(message, tabs[i]);
