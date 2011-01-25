@@ -43,7 +43,7 @@ This extension supports:
         <td>-</td>
         <td>X</td>
         <td>X</td>
-        <td>Not tested</td>
+        <td>Tested</td>
     </tr>
     <tr>
         <td>Handelsbanken</td>
@@ -66,6 +66,9 @@ This extension supports:
         <td>X</td>
         <td>Not tested</td>
     </tr>
-
 </table>
 
+## License
+Copyright (C) 2011 DroidGiro authors
+
+Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
