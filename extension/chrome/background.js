@@ -110,6 +110,9 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("secure.handelsbanken.se") != -1) {
                 found++;
                 handleHandelsbanken(message, tabs[i]);
+            } else if (tabs[i].url.indexOf("seb.se") != -1) {
+                found++;
+                handleSeb(message, tabs[i]);
             }
         }
 
@@ -162,6 +165,16 @@ function handleHandelsbanken(invoice, tab) {
         code: "if ('"+ invoice.amount +"' != '') document.getElementById('TRANSAKTIONSBELOPP').value= '"+ invoice.amount +"';" +
               "if ('"+ invoice.account +"' != '') document.getElementById('KTONR_BETMOTT').value= '"+ invoice.account +"';" +
               "if ('"+ invoice.reference +"' != '') document.getElementsByName('FRI_TEXT0')[0].value = '"+ invoice.reference +"';"
+    });
+}
+
+function handleSeb(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+	code: "" +
+	"if ('" + invoice.type + "' == 'BG') { document.getElementById('IKPMaster_MainPlaceHolder_A3').value='" + invoice.account + "'; document.getElementById('IKPMaster_MainPlaceHolder_BG').checked='checked'; " +
+	"if ('" + invoice.type + "' == 'PG') { document.getElementById('IKPMaster_MainPlaceHolder_A11').value='" + invoice.account + "'; document.getElementById('IKPMaster_MainPlaceHolder_PG').checked='checked'; " +
+        "document.getElementById('IKPMaster_MainPlaceHolder_A4').value='" + invoice.amount + "'; document.getElementById('IKPMaster_MainPlaceHolder_A7').value='" + invoice.reference + "';" +
+	"document.getElementById('IKPMaster_MainPlaceHolder_OCR').checked='checked';"	
     });
 }
 
