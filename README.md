@@ -18,49 +18,49 @@ This extension supports:
         <th>Status</th>
     </tr>
     <tr>
-        <th>Skandiabanken</th>
+        <td>Skandiabanken</td>
         <td>X</td>
         <td>X</td>
         <td>X</td>
         <td>Tested</td>
     </tr>
     <tr>
-        <th>Swedbank</th>
+        <td>Swedbank</td>
         <td>-</td>
         <td>X</td>
         <td>X</td>
         <td>Tested</td>
     </tr>
     <tr>
-        <th>Länsforsakringar</th>
+        <td>Länsforsakringar</td>
         <td>-</td>
         <td>X</td>
         <td>-</td>
         <td>Not tested</td>
     </tr>
     <tr>
-        <th>Nordea</th>
+        <td>Nordea</td>
         <td>-</td>
         <td>X</td>
         <td>X</td>
         <td>Not tested</td>
     </tr>
     <tr>
-        <th>Handelsbanken</th>
+        <td>Handelsbanken</td>
         <td>X</td>
         <td>X</td>
         <td>X</td>
         <td>Tested, only support reference for private</td>
     </tr>
     <tr>
-        <th>Nordnet</th>
+        <td>Nordnet</td>
         <td>X</td>
         <td>X</td>
         <td>X</td>
         <td>Tested</td>
     </tr>
     <tr>
-        <th>SEB</th>
+        <td>SEB</td>
         <td>X</td>
         <td>X</td>
         <td>X</td>
