@@ -113,6 +113,9 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("seb.se") != -1) {
                 found++;
                 handleSeb(message, tabs[i]);
+            } else if (tabs[i].url.indexOf("nordnet.se") != -1) {
+                found++;
+                handleNordnet(message, tabs[i]);
             }
         }
 
@@ -175,6 +178,15 @@ function handleSeb(invoice, tab) {
 	"if ('" + invoice.type + "' == 'PG') { document.getElementById('IKPMaster_MainPlaceHolder_A11').value='" + invoice.account + "'; document.getElementById('IKPMaster_MainPlaceHolder_PG').checked='checked'; " +
         "document.getElementById('IKPMaster_MainPlaceHolder_A4').value='" + invoice.amount + "'; document.getElementById('IKPMaster_MainPlaceHolder_A7').value='" + invoice.reference + "';" +
 	"document.getElementById('IKPMaster_MainPlaceHolder_OCR').checked='checked';"	
+    });
+}
+
+function handleNordnet(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+	code: "" +
+	"if ('" + invoice.account + "' != '') document.getElementById('kontonummer').value='" + invoice.account + "';" +
+	"if ('" + invoice.reference + "' != '') document.getElementById('ocr').value='" + invoice.reference + "';" +
+	"if ('" + invoice.amount + "' != '') document.getElementById('belopp').value='" + invoice.amount + "';"
     });
 }
 
