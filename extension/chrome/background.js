@@ -1,4 +1,4 @@
-var baseUrl = 'http://droidgiro.appspot.com';
+var baseUrl = 'http://cloud.droidgiro.se';
 var registerUrl = baseUrl + '/register';
 
 function notify(message) {
