@@ -1,4 +1,4 @@
-var baseUrl = 'http://2.latest.agiroapp.appspot.com';
+var baseUrl = 'http://droidgiro.appspot.com';
 var registerUrl = baseUrl + '/register';
 
 function notify(message) {
