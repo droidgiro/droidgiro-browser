@@ -110,7 +110,7 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("secure.handelsbanken.se") != -1) {
                 found++;
                 handleHandelsbanken(message, tabs[i]);
-            } else if (tabs[i].url.indexOf("seb.se") != -1) {
+            } else if (tabs[i].url.indexOf("sebank.se") != -1) {
                 found++;
                 handleSeb(message, tabs[i]);
             } else if (tabs[i].url.indexOf("nordnet.se") != -1) {
