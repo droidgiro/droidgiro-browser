@@ -40,7 +40,7 @@ This extension supports:
     </tr>
     <tr>
         <td>Nordea</td>
-        <td>-</td>
+        <td>X</td>
         <td>X</td>
         <td>X</td>
         <td>Tested</td>
