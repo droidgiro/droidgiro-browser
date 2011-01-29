@@ -26,7 +26,7 @@ This extension supports:
     </tr>
     <tr>
         <td>Swedbank</td>
-        <td>-</td>
+        <td>X</td>
         <td>X</td>
         <td>X</td>
         <td>Tested</td>
