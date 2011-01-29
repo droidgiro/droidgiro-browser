@@ -140,10 +140,23 @@ function handleSkandiabanken(invoice, tab) {
 }
 
 function handleSwedbank(invoice, tab) {
-    console.log('handle swedbank...');
     chrome.tabs.executeScript(tab.id, {
         code: "if ('"+ invoice.reference +"' != '') document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"';" +
-              "if ('"+ invoice.amount +"' != '') document.getElementById('beloppProcent').value= '"+ invoice.amount +"'"
+              "if ('"+ invoice.amount +"' != '') document.getElementById('beloppProcent').value= '"+ invoice.amount +"';" +
+              "hit = -1;"+
+          "for (i=1; i<document.getElementById('tillkontoIndex').length;i++) {"+
+                  "if(document.getElementById('tillkontoIndex').options[i].text.replace(\/ \/g, '').indexOf('"+ invoice.account +"') != -1) {"+
+                      "document.getElementById('tillkontoIndex').selectedIndex=i;"+
+                      "hit = i;"+
+                      "break;"+
+                  "}"+
+              "}"+
+              "if (hit == -1) {"+
+                  "document.getElementById('annan_mottagare').style.display = '';"+
+                  "if ('"+ invoice.type +"' == 'BG') { document.getElementById('BGKonto').checked='checked'; }"+
+                  "if ('"+ invoice.type +"' == 'PG') { document.getElementById('PGKonto').checked='checked'; }"+
+                  "document.getElementById('kontonummer').value = '"+ invoice.account +"';"+
+              "}"
     });
 }
 
