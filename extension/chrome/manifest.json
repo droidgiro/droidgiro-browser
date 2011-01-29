@@ -1,6 +1,6 @@
 {
   "name": "DroidGiro Phone to Chrome",
-  "version": "0.9",
+  "version": "0.9.1",
   "description": "Med tillägget DroidGiro Phone to Chrome kan du skicka information skannat från DroidGiro på din Android-enhet till Chrome.",
   "background_page": "background.html",
   "browser_action": {
