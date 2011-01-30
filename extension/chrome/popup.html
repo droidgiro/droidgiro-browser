@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                min-width: 300px;
+                overflow: hidden;
+                font-family: sans-serif;
+                font-size: 0.9em;
+                background-image: -webkit-gradient(radial, 50% 10%, 10, 50% 10%, 400, from(#FFF), to(#C1CDC1));
+            }
+            a {
+                color: #104E8B;
+                text-decoration: none;
+            }
+            button {
+                font-weight: bold;
+                padding: 5px 15px;
+            }
+            .pin {
+                background-color: #000;
+                color: #fff;
+                padding: 3px 5px;
+                margin-left: 2px;
+            }
+            aside {
+                float:left;
+                width:50px;
+            }
+            section {
+                float:left;
+                width: 200px;
+                margin-left: 20px;
+            }
+            footer {
+                clear: both;
+            }
+        </style>
+
         <script src="jquery-1.4.4.min.js" type="text/javascript"></script>
         <script src="ICanHaz.min.js" type="text/javascript"></script>
 
+        <script id="welcome" type="text/html">
+            <p>Generera en pinkod för att börja skanna.</p>
+        </script>
+
         <script id="generate_pin" type="text/html">
-            <p>Genererar PIN...</p>
+            <p>Genererar pinkod...</p>
         </script>
 
         <script id="pin" type="text/html">
-            <h3>{{ pin_code }}</h3>
+            <h3><span class="pin">{{ pin_code_1 }}</span><span class="pin">{{ pin_code_2 }}</span><span class="pin">{{ pin_code_3 }}</span><span class="pin">{{ pin_code_4 }}</span></h3>
             <p>Mata in pinkoden i Droidgiro appen. Pinkoden är giltig i fem minuter.</p>
         </script>
 
@@ -19,24 +60,33 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
+                welcome = ich.welcome({});
+                $('#content').html(welcome);
+
                 $('#generate_pin').click(function () {
                     var bg = chrome.extension.getBackgroundPage();
                     bg.initializeBrowserChannel();
 
                     generate_pin = ich.generate_pin({});
-                    $('#main').html(generate_pin);
+                    $('#content').html(generate_pin);
                 });
             });
 
             chrome.extension.onRequest.addListener(function(request) {
                 if (request.type == 'pin') {
+                    pinCode = String(request.payload);
+                    pinList = pinCode.split("");
+                    console.log(pinList);
                     pin = ich.pin({
-                        'pin_code': request.payload
+                        'pin_code_1': pinList[0],
+                        'pin_code_2': pinList[1],
+                        'pin_code_3': pinList[2],
+                        'pin_code_4': pinList[3]
                     });
-                    $('#main').html(pin);
+                    $('#content').html(pin);
                 } else if (request.type == 'registered') {
                     connected = ich.connected({});
-                    $('#main').html(connected);
+                    $('#content').html(connected);
                 } else if (request.type == 'reload') {
                     setTimeout(function() {
                         var bg = chrome.extension.getBackgroundPage();
@@ -49,8 +99,15 @@
     </head>
 
     <body>
-        <h1>Droidgiro</h1>
-        <button id="generate_pin">Generera PIN</button>
-        <div id="main"></div>
+        <aside>
+            <img src="iconpopup.png">
+        </aside>
+        <section>
+            <button id="generate_pin">Generera PIN</button>
+            <div id="content"></div>
+        </section>
+        <footer>
+            <p><a href="#" onclick="chrome.tabs.create({url: 'http://droidgiro.se'})">Help</a></p>
+        </footer>
     </body>
 </html>
