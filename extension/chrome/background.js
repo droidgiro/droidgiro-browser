@@ -84,10 +84,12 @@ function onMessage(evt) {
 function onRegisterMessage(message) {
     // TODO: Check if popup is still open, oterwise show a notification.
     sendRequest('registered', message.payload);
+    /*
     var notification = new Object();
     notification.title = 'Connected'
     notification.body = 'Ready to recieve invoices.'
     notify(notification);
+    */
 }
 
 function onInvoiceMessage(message) {
