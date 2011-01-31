@@ -1,6 +1,6 @@
 {
   "name": "DroidGiro",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Med tillägget DroidGiro kan du skicka information skannat från DroidGiro på din Android-enhet till Chrome.",
   "background_page": "background.html",
   "browser_action": {
