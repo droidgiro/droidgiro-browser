@@ -188,6 +188,7 @@ function handleHandelsbanken(invoice, tab) {
 
 function handleSeb(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
+        allFrames: true,
         code: "" +
         "if ('" + invoice.account + "' != '') { if ('" + invoice.type + "' == 'BG') { document.getElementById('IKPMaster_MainPlaceHolder_A3').value='" + invoice.account + "'; document.getElementById('IKPMaster_MainPlaceHolder_BG').checked='checked'; } }" +
         "if ('" + invoice.account + "' != '') { if ('" + invoice.type + "' == 'PG') { document.getElementById('IKPMaster_MainPlaceHolder_A11').value='" + invoice.account + "'; document.getElementById('IKPMaster_MainPlaceHolder_PG').checked='checked'; } }" +
