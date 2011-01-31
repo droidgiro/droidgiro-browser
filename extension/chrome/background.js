@@ -118,6 +118,9 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("nordnet.se") != -1) {
                 found++;
                 handleNordnet(message, tabs[i]);
+            } else if (tabs[i].url.indexOf("internetbanken.sparbankenoresund.se") != -1) {
+                found++;
+                handleSparbankenOresund(message, tabs[i]);
             }
         }
 
@@ -204,6 +207,17 @@ function handleNordnet(invoice, tab) {
 	"if ('" + invoice.account + "' != '') document.getElementById('kontonummer').value='" + invoice.account + "';" +
 	"if ('" + invoice.reference + "' != '') document.getElementById('ocr').value='" + invoice.reference + "';" +
 	"if ('" + invoice.amount + "' != '') document.getElementById('belopp').value='" + invoice.amount + "';"
+    });
+}
+
+function handleSparbankenOresund(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+	code: "" +
+        "if ('" + invoice.type + "' != '') { if ('" + invoice.type + "' == 'PG') {  document.getElementById('ctl00_SPWebPartManager1_g_3d9ec7a0_5765_4aaa_a9f4_2a505ae21b4e_RadBtnPostGiroID').checked='checked'; } } " +
+        "if ('" + invoice.type + "' != '') { if ('" + invoice.type + "' == 'BG') {  document.getElementById('ctl00_SPWebPartManager1_g_3d9ec7a0_5765_4aaa_a9f4_2a505ae21b4e_RadBtnBankGiroID').checked='checked'; } } " +
+	"if ('" + invoice.account + "' != '') document.getElementById('ctl00_SPWebPartManager1_g_3d9ec7a0_5765_4aaa_a9f4_2a505ae21b4e_txtBoxGiroNoID').value='" + invoice.account + "';" +
+	"if ('" + invoice.reference + "' != '') document.getElementById('ctl00_SPWebPartManager1_g_3d9ec7a0_5765_4aaa_a9f4_2a505ae21b4e_txtBoxReferenceNoID').value = '" + invoice.reference + "';" +
+	"if ('" + invoice.amount + "' != '') document.getElementById('ctl00_SPWebPartManager1_g_3d9ec7a0_5765_4aaa_a9f4_2a505ae21b4e_txtBoxAmountID').value='" + invoice.amount + "';"
     });
 }
 
