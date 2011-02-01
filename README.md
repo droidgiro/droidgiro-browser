@@ -64,7 +64,14 @@ This extension supports:
         <td>X</td>
         <td>X</td>
         <td>X</td>
-        <td>Not tested</td>
+        <td>Tested</td>
+    </tr>
+    <tr>
+        <td>Sparbanken Öresund</td>
+        <td>X</td>
+        <td>X</td>
+        <td>X</td>
+        <td>Tested</td>
     </tr>
 </table>
 
