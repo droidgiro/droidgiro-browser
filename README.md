@@ -33,9 +33,9 @@ This extension supports:
     </tr>
     <tr>
         <td>Länsforsakringar</td>
-        <td>-</td>
         <td>X</td>
-        <td>-</td>
+        <td>X</td>
+        <td>X</td>
         <td>Not tested</td>
     </tr>
     <tr>

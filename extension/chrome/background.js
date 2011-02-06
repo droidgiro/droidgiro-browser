@@ -167,7 +167,9 @@ function handleSwedbank(invoice, tab) {
 
 function handleLansforsakringar(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "document.getElementById('paymentId').value= '"+ invoice.reference +"'"
+        code: "document.getElementById('paymentId').value= '"+ invoice.reference +"';" +
+              "document.getElementById('payeeInput').value= '" + invoice.account + "';" +
+              "document.getElementById('amount').value= '" + invoice.amount + "';"
     });
 }
 
