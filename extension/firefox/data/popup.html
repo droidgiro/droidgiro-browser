@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				min-width: 300px;
+				overflow: hidden;
+				font-family: sans-serif;
+				font-size: 0.9em;
+				background-image: -webkit-gradient(radial, 50% 10%, 10, 50% 10%, 400, from(#FFF), to(#C1CDC1));
+			}
+			a {
+				color: #104E8B;
+				text-decoration: none;
+			}
+			button {
+				font-weight: bold;
+				padding: 5px 15px;
+			}
+			.pin {
+				background-color: #000;
+				color: #fff;
+				padding: 3px 5px;
+				margin-left: 2px;
+			}
+			aside {
+				float:left;
+				width:50px;
+			}
+			section {
+				float:left;
+				width: 200px;
+				margin-left: 20px;
+			}
+			footer {
+				clear: both;
+			}
+		</style>
+		<script id="welcome" type="text/html">
+			<p>Generera en pinkod för att börja skanna.</p>
+		</script>
+
+		<script id="generate_pin" type="text/html">
+			<p><img src="images/ajax-loader.gif"> Genererar pinkod...</p>
+		</script>
+
+		<script id="pin" type="text/html">
+			<h3><span class="pin">{{ pin_code_1 }}</span><span class="pin">{{ pin_code_2 }}</span><span class="pin">{{ pin_code_3 }}</span><span class="pin">{{ pin_code_4 }}</span></h3>
+			<p>Mata in pinkoden i Droidgiro appen. Pinkoden är giltig i fem minuter.</p>
+		</script>
+
+		<script id="connected" type="text/html">
+			<p>Redo att skanna.</p>
+		</script>
+	</head>
+	<body style="background-color:white">
+		<aside>
+			<img src="images/iconpopup.png">
+		</aside>
+		<section>
+			<button id="generate_pin">Generera pinkod</button>
+			<div id="content"></div>
+		</section>
+		<footer>
+			<p><a href="#" onclick="chrome.tabs.create({url: 'http://droidgiro.se'})">Hjälp</a></p>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "name": "droidgiro",
+    "license": "MPL 1.1/GPL 2.0/LGPL 2.1",
+    "author": "Cork",
+    "version": "0.61",
+    "fullName": "DroidGiro Phone to Firefox",
+    "id": "jid0-0PvKcvZ766Dugg6imp1D2OOWob4",
+    "description": "Med tillägget DroidGiro Phone to Firefox kan du skicka information skannat från DroidGiro på din Android-enhet till Firefox.",
+    "icon": "data/images/icon.png",
+    "icon64": "data/images/iconpopup.png"
+}
