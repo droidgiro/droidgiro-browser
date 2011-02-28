@@ -148,8 +148,8 @@ function handleSwedbank(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
         code: "if ('"+ invoice.reference +"' != '') document.getElementById('meddelandeOCR').value= '"+ invoice.reference +"';" +
               "if ('"+ invoice.amount +"' != '') document.getElementById('beloppProcent').value= '"+ invoice.amount +"';" +
-              "hit = -1;"+
-          "for (i=1; i<document.getElementById('tillkontoIndex').length;i++) {"+
+              "var hit = -1;"+
+          "for (var i=1; i<document.getElementById('tillkontoIndex').length;i++) {"+
                   "if(document.getElementById('tillkontoIndex').options[i].text.replace(\/ \/g, '').indexOf('"+ invoice.account +"') != -1) {"+
                       "document.getElementById('tillkontoIndex').selectedIndex=i;"+
                       "hit = i;"+
