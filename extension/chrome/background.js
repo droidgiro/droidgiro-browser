@@ -118,6 +118,9 @@ function onInvoiceMessage(message) {
             } else if (tabs[i].url.indexOf("nordnet.se") != -1) {
                 found++;
                 handleNordnet(message, tabs[i]);
+            } else if (tabs[i].url.indexOf("icabanken.se") != -1) {
+                found++;
+                handleIca(message, tabs[i]);
             } else if (tabs[i].url.indexOf("internetbanken.sparbankenoresund.se") != -1) {
                 found++;
                 handleSparbankenOresund(message, tabs[i]);
@@ -209,6 +212,18 @@ function handleNordnet(invoice, tab) {
 	"if ('" + invoice.account + "' != '') document.getElementById('kontonummer').value='" + invoice.account + "';" +
 	"if ('" + invoice.reference + "' != '') document.getElementById('ocr').value='" + invoice.reference + "';" +
 	"if ('" + invoice.amount + "' != '') document.getElementById('belopp').value='" + invoice.amount + "';"
+    });
+}
+
+function handleIca(invoice, tab) {
+    chrome.tabs.executeScript(tab.id, {
+	code: "" +
+	"if ('" + invoice.account + "' != '' && '" + invoice.type + "' == 'BG') document.getElementById('recipientaccounttype').value='1' ;" +
+	"if ('" + invoice.account + "' != '' && '" + invoice.type + "' == 'PG') document.getElementById('recipientaccounttype').value='2' ;" +
+	"if ('" + invoice.account + "' != '') document.getElementById('newrecipientaccountid').value='" + invoice.account + "';" +
+	"if ('" + invoice.reference + "' != '') document.getElementById('paymentreftype').value='1';" +
+	"if ('" + invoice.reference + "' != '') document.getElementsByClassName('paymentref')[0].value='" + invoice.reference + "';" +
+	"if ('" + invoice.amount + "' != '') document.getElementById('paymentamount').value='" + invoice.amount + "';"
     });
 }
 
