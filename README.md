@@ -73,6 +73,13 @@ This extension supports:
         <td>X</td>
         <td>Tested</td>
     </tr>
+    <tr>
+        <td>ICA Banken</td>
+        <td>X</td>
+        <td>X</td>
+        <td>X</td>
+        <td>Tested</td>
+    </tr>
 </table>
 
 ## License
