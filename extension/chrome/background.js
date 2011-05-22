@@ -141,9 +141,9 @@ function onInvoiceMessage(message) {
 // using; chrome.tabs.executeScript(null, {file: "swedbank_script.js"});
 function handleSkandiabanken(invoice, tab) {
     chrome.tabs.executeScript(tab.id, {
-        code: "if ('"+ invoice.reference +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphContentWide_cphContentWide_cphMainContent_tbReferenceNumber').value='" + invoice.reference +  "';" +
-              "if ('"+ invoice.amount +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphContentWide_cphContentWide_cphMainContent_tbAmount').value= '"+ invoice.amount +"';" +
-              "if ('"+ invoice.account +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphContentWide_cphContentWide_cphMainContent_tbNewRecipient').value= '"+ invoice.account +"'"
+        code: "if ('"+ invoice.reference +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphBody_cphContentWide_cphContentWide_cphMainContent_tbReferenceNumber').value='" + invoice.reference +  "';" +
+              "if ('"+ invoice.amount +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphBody_cphContentWide_cphContentWide_cphMainContent_tbAmount').value= '"+ invoice.amount +"';" +
+              "if ('"+ invoice.account +"' != '') document.getElementById('ctl00_ctl00_ctl00_cphBody_cphContentWide_cphContentWide_cphMainContent_tbNewRecipient').value= '"+ invoice.account +"'"
     });
 }
 
