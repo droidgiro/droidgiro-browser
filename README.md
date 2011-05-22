@@ -9,8 +9,6 @@ The following browsers are currently supported:
 ### Chrome
 See http://droigiro.se for supported banks
 
-This extension supports:
-
 ## License
 Copyright (C) 2011 DroidGiro authors
 
