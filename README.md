@@ -7,80 +7,9 @@ This repository contains browser extensions used to feed payment forms with data
 The following browsers are currently supported:
 
 ### Chrome
-This extension supports:
+See http://droigiro.se for supported banks
 
-<table>
-    <tr>
-        <th>Bank</th>
-        <th>Account Number</th>
-        <th>Reference</th>
-        <th>Amount</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td>Skandiabanken</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>Swedbank</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>Länsforsakringar</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Not tested</td>
-    </tr>
-    <tr>
-        <td>Nordea</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>Handelsbanken</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested, only support reference for private</td>
-    </tr>
-    <tr>
-        <td>Nordnet</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>SEB</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>Sparbanken Öresund</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-    <tr>
-        <td>ICA Banken</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>Tested</td>
-    </tr>
-</table>
+This extension supports:
 
 ## License
 Copyright (C) 2011 DroidGiro authors
